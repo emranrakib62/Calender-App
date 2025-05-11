@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,24 +12,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/inputYear"
-            android:hint="Enter A Year"
-            android:inputType="number"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:boxBackgroundColor="#64FFDA"
+            android:hint="Enter a year"
+            android:textAlignment="center">
 
-        <Button
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputYearEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <soup.neumorphism.NeumorphCardView
             android:id="@+id/startButton"
-            android:text="See Calendar"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="40dp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:foreground="?attr/selectableItemBackground"
+            app:neumorph_lightSource="leftTop"
+            app:neumorph_shadowElevation="5dp"
+            app:neumorph_shapeType="flat"
+            app:neumorph_backgroundColor="@color/white"
+            app:neumorph_cornerFamily="rounded"
+            app:neumorph_cornerSize="16dp"
+            app:neumorph_shadowColorDark="@color/purple_500"
+            app:neumorph_shadowColorLight="@color/black">
+
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="See Calendar"
+                android:textSize="23sp"
+                android:textColor="@android:color/black" />
+        </soup.neumorphism.NeumorphCardView>
 
         <TextView
             android:id="@+id/resultText"
             android:textSize="18sp"
-            android:paddingTop="8dp"
+            android:layout_marginTop="20dp"
+            android:paddingTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

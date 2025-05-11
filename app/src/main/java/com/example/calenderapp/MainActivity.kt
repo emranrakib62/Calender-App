@@ -1,11 +1,12 @@
 package com.example.calenderapp
 
-import android.app.AlertDialog
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import soup.neumorphism.NeumorphCardView
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Year
@@ -13,8 +14,8 @@ import java.time.Year
 class MainActivity : AppCompatActivity() {
 
     private lateinit var calendarLayout: LinearLayout
-    private lateinit var inputYear: EditText
-    private lateinit var startButton: Button
+    private lateinit var inputYearEditText: EditText
+    private lateinit var startButton: NeumorphCardView
     private lateinit var resultText: TextView
 
     private val months = arrayOf(
@@ -24,18 +25,19 @@ class MainActivity : AppCompatActivity() {
 
     private val daysInMonth = arrayOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 
+    @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        inputYear = findViewById(R.id.inputYear)
+        inputYearEditText = findViewById(R.id.inputYearEditText)
         startButton = findViewById(R.id.startButton)
         resultText = findViewById(R.id.resultText)
         calendarLayout = findViewById(R.id.calendarLayout)
 
         startButton.setOnClickListener {
-            val yearStr = inputYear.text.toString()
+            val yearStr = inputYearEditText.text.toString()
             if (yearStr.isEmpty()) {
                 Toast.makeText(this, "Please enter a year", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -88,9 +90,7 @@ class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getFirstDayOfYear(year: Int): Int {
-
-        val firstDay = LocalDate.of(year, 1, 1).dayOfWeek
-        return when (firstDay) {
+        return when (LocalDate.of(year, 1, 1).dayOfWeek) {
             DayOfWeek.SUNDAY -> 0
             DayOfWeek.MONDAY -> 1
             DayOfWeek.TUESDAY -> 2
