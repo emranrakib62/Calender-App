@@ -1,10 +1,12 @@
 package com.example.calenderapp
 
-import android.annotation.SuppressLint
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import soup.neumorphism.NeumorphCardView
 import java.time.DayOfWeek
@@ -25,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     private val daysInMonth = arrayOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 
-    @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,13 +65,20 @@ class MainActivity : AppCompatActivity() {
         var weekday = getFirstDayOfYear(year)
 
         for (i in months.indices) {
-            val monthLabel = TextView(this)
-            monthLabel.text = "\n--------- ${months[i]} ---------\nSun Mon Tue Wed Thu Fri Sat"
+            // Month Header
+            val monthLabel = TextView(this).apply {
+                text = "\n----------- ${months[i]} ------------\nSun Mon Tue Wed Thu Fri Sat"
+                typeface = Typeface.MONOSPACE
+                textSize = 16f
+                gravity = Gravity.CENTER
+                textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+            }
             calendarLayout.addView(monthLabel)
 
+            // Dates Grid
             val calendarText = StringBuilder()
             for (j in 0 until weekday) {
-                calendarText.append("    ")
+                calendarText.append("    ") // 4 spaces for empty days
             }
 
             for (day in 1..daysIn[i]) {
@@ -82,8 +90,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            val monthContent = TextView(this)
-            monthContent.text = calendarText.toString()
+            val monthContent = TextView(this).apply {
+                text = calendarText.toString()
+                typeface = Typeface.MONOSPACE
+                textSize = 15f
+                gravity = Gravity.CENTER
+                textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+            }
             calendarLayout.addView(monthContent)
         }
     }
@@ -99,5 +112,13 @@ class MainActivity : AppCompatActivity() {
             DayOfWeek.FRIDAY -> 5
             DayOfWeek.SATURDAY -> 6
         }
+    }
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setTitle("Exit App")
+            .setMessage("Are you sure you want to exit?")
+            .setPositiveButton("Yes") { _, _ -> super.onBackPressed() }
+            .setNegativeButton("No", null)
+            .show()
     }
 }

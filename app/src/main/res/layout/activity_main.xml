@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,8 +14,9 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxBackgroundColor="#64FFDA"
+            app:boxBackgroundColor="#D8F46A"
             android:hint="Enter a year"
+            app:hintAnimationEnabled="true"
             android:textAlignment="center">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -26,18 +26,16 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <soup.neumorphism.NeumorphCardView
-            android:id="@+id/startButton"
             android:clickable="true"
             android:focusable="true"
             android:layout_marginTop="40dp"
+            android:id="@+id/startButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:layout_gravity="center"
-            android:foreground="?attr/selectableItemBackground"
             app:neumorph_lightSource="leftTop"
             app:neumorph_shadowElevation="5dp"
-            app:neumorph_shapeType="flat"
             app:neumorph_backgroundColor="@color/white"
             app:neumorph_cornerFamily="rounded"
             app:neumorph_cornerSize="16dp"
